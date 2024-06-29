@@ -1,0 +1,17 @@
+from imblearn.combine import SMOTEENN
+import pandas as pd
+
+# Assuming dataClean is your DataFrame and 'Class' is the target column
+X = dataClean.drop(columns=['Class'])
+y = dataClean['Class']
+
+smote_enn = SMOTEENN(random_state=42)
+
+# Resampling data using SMOTEENN (combination of SMOTE and ENN)
+X_resampled, y_resampled = smote_enn.fit_resample(X, y)
+
+# Combine the resampled data back into a DataFrame
+dataResampled = pd.DataFrame(X_resampled, columns=X.columns)
+dataResampled['Class'] = y_resampled
+
+print("Jumlah baris data setelah resampling: {}".format(dataResampled.shape[0]))
